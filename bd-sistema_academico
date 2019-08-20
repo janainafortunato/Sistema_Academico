@@ -1,0 +1,64 @@
+CREATE DATABASE IF NOT EXISTS sistema_academico;
+
+USE sistema_academico;
+
+DROP TABLE IF EXISTS ´login´;
+
+CREATE TABLE ´login´(
+´id_login´ INT NOT NULL AUTO_INCREMENT,
+´name´ VARCHAR(255) NOT NULL,
+´email´ VARCHAR(255) NOT NULL,
+´password´ VARCHAR(255) NOT NULL,
+PRIMARY KEY (´id_login´)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+INSERT INTO ´login´( ´id_login´, ´name´, ´email´, ´password´) VALUES
+
+( 1, 'Ana Maria Silva', 'teste01@teste.com', '123'),
+( 2,'Jose da Santos Silva', 'teste02@teste.com', '1234');
+
+DROP TABLE IF EXISTS ´aluno´;
+
+CREATE TABLE ´aluno´(
+´id_aluno´ INT NOT NULL AUTO_INCREMENT,
+´name´ VARCHAR(255) NOT NULL,
+´password´ VARCHAR(255) NOT NULL,
+´nascimento´ DATE NULL,
+´id_login_fk´ INT NULL,
+PRIMARY KEY(´id_aluno´)
+)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+ALTER TABLE ´aluno´ ADD CONSTRAINT ´id_login_fk´ FOREIGN KEY (´id_login_fk´) REFERENCES ´login´(´id_login´);
+
+INSERT INTO ´aluno´( ´id_aluno´, ´name´, ´password´, ´nascimento´) VALUES 
+( 1, 'Adriano Santos Silva', '123', '1987-10-13'),
+( 2, 'Janaina Fortunato da Silva', '1234', '1987-03-12');
+
+
+DROP TABLE IF EXISTS `usuarios`;
+
+CREATE TABLE ´usuarios´(
+´id_usuarios´ INT NOT NULL AUTO_INCREMENT,
+´name´ VARCHAR(255) NOT NULL,
+´email´ VARCHAR(255) NOT NULL,
+´password´ VARCHAR(255) NOT NULL,
+´id_login_fk´ INT NULL,
+´id_aluno_fk´ INT NULL,
+PRIMARY KEY (´id_usuarios´)
+)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+ALTER TABLE ´usuarios´ ADD CONSTRAINT ´id_login_fk´ FOREIGN KEY (´id_login_fk´) REFERENCES ´login´(´id_login´);
+ALTER TABLE ´usuarios´ ADD CONSTRAINT ´id_aluno_fk´ FOREIGN KEY (´id_aluno_fk´) REFERENCES ´aluno´(´id_aluno´);
+
+INSERT INTO ´usuarios´(´id_usuarios´, ´name´, ´email´, ´password´) VALUES 
+(1, 'Janaina Fortunato da Silva', 'teste04@teste.com', 123456),
+(2, 'Tarciso alves da Silva', 'teste05@teste.com', 1234567);
+
+
+
+
+
+
+
+
+
